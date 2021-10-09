@@ -15,27 +15,25 @@ class Detail extends StatelessWidget {
       appBar: AppBar(
         title: Text("${item.name}"),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Container(
-                child: Image.asset(
-                  "assets/images/${item.image}",
-                  fit: BoxFit.fitWidth,
-                ),
+      body: Center(
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+
+              Image.asset(
+                "assets/images/${item.image}",
+                fit: BoxFit.fitWidth,
               ),
-            ),
-            Column(
-              children: [
-                Text("ชื่อเมนู: ${item.name}",
-                    style: TextStyle(fontSize: 20)),
-                Text("ราคา: ${item.price} บาท",
-                    style: TextStyle(fontSize: 20)),
-              ],
-            ),
-          ],
+              SizedBox(
+                height: 10,
+              ),
+              Text(" ชื่อเมนู: ${item.name}",
+                  style: TextStyle(fontSize: 20)),
+              Text(" ราคา: ${item.price} บาท",
+                  style: TextStyle(fontSize: 20)),
+            ],
+          ),
         ),
       ),
     );

@@ -30,46 +30,63 @@ class _FoodPageState extends State<FoodPage> {
         itemBuilder: (BuildContext context,int index) {
           Food item = items[index];
 
-          return Card(
-            margin: const EdgeInsets.all(0.0),
-            child: InkWell(
-              onTap: () {
-                print(item);
-                Navigator.pushNamed(
-                  context,
-                  Detail.routeName,
-                  arguments: item,
-                );
+          return Container(
 
-              },
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'assets/images/${item.image}',
-                      width: 60.0,
-                      height: 60.0,
-                      fit: BoxFit.cover,
-                    ),
+            decoration: new BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(.5),
+                  blurRadius: 10.0, // soften the shadow
+                  spreadRadius: 0.0, //extend the shadow
+                  offset: Offset(
+                    10.0, // Move to right 10  horizontally
+                    0.0, // Move to bottom 10 Vertically
                   ),
-                  SizedBox(width: 10.0,),
-                  Expanded(
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.name,
-                          ),
-                          Text(
-                            "${item.price.toString()} บาท",
-                          ),
-                        ],
+                )
+              ],
+            ),
+
+            child: Card(
+              margin: const EdgeInsets.all(4.0),
+              child: InkWell(
+                onTap: () {
+                  print(item);
+                  Navigator.pushNamed(
+                    context,
+                    Detail.routeName,
+                    arguments: item,
+                  );
+
+                },
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        'assets/images/${item.image}',
+                        width: 60.0,
+                        height: 60.0,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(width: 10.0,),
+                    Expanded(
+                      child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.name,
+                            ),
+                            Text(
+                              "${item.price.toString()} บาท",
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
