@@ -1,6 +1,9 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food/pages/home/home_page.dart';
-
+import 'package:http/http.dart' as http;
 class LoginPage extends StatefulWidget {
   static const routeName = '/login';
 
@@ -129,11 +132,25 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+  Future<bool> _checkPin() async {
+    var url = Uri.parse('https://cpsu-test-api.herokuapp.com/login');
+    var response = await http.post(url, body:
+    {
+      "pin" : input
+    }
+    );
+
+    Map<String, dynamic> jsonBody = json.decode(response.body);
+    bool data = jsonBody['data'];
+    print("data: $data");
+    return data ;
+}
+
 
   void _handleClickButton(int num) {
     print('You pressed $num');
 
-    setState(() {
+    setState(() async {
       if (num == -1) {
         if (input.length > 0) input = input.substring(0, input.length - 1);
       } else {
@@ -141,7 +158,10 @@ class _LoginPageState extends State<LoginPage> {
       }
 
       if (input.length == pin.length) {
-        if (input == pin) {
+        var checkPin = await _checkPin();
+
+
+        if (checkPin) {
           /*Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const HomePage()),
